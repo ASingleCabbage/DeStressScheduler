@@ -98,8 +98,13 @@ def scheduleEvents(calendar, duration, startHour, endHour):
 def postEvents(request):
     payload = json.loads(request.POST['data'])
     calendars = payload['events']
-    startHour = int(payload['startHour'])
-    endHour = int(payload['endHour'])
+    startHour = 12
+    endHour = 17
+
+    if payload['startHour'] != '':
+        startHour = int(payload['startHour'])
+    if payload['endHour'] != '':
+        endHour = int(payload['endHour'])
     breakDuration = int(payload['duration'])
     
     events = []

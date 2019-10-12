@@ -118,6 +118,10 @@ function populateCalendar(events){
                 eventsCreated += 1
                 if(eventsCreated == events.length){
                     console.log("all events created")
+                    alert("Events successfully created");
+                    $("#goButton").attr("disabled", false);
+                    $("#goButton").text("Ready? Set? Go!");
+
                 }
             })
         }
@@ -133,9 +137,18 @@ function updateDuration(){
 function sendEvents(){
     console.log("SENDING")
 
+    startHour = $('#startHour').val()
+    endHour = $('#endHour').val()
+    if(startHour){
+        startHour = 12
+    }
+    if(endHour){
+        endHour == 17
+    }
+
     data = { 'events': calendarEvents, 
-             'startHour': $('#startHour').val(), 
-             'endHour': $('#endHour').val(), 
+             'startHour': startHour, 
+             'endHour': endHour, 
              'duration': updateDuration(),}
 
 
@@ -243,5 +256,7 @@ $('.form-check-input').change(function(){
 })
 
 $('#goButton').click(function(){
+    $('#goButton').text("Processing...")
+    $("#goButton").attr("disabled", true);
     listUpcomingEvents();
 })
