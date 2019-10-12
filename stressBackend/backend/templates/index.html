@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <title>DeStress Scheduler</title>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    {% comment %} <link rel="stylesheet" href="{% static "bootstrap" %}"> {% endcomment %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    {% comment %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> {% endcomment %}
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">DeStress Scheduler</h1>
+            <h2>Because we are only poor enough for Self-Care™ 😞</h2>
+            <p class="lead">Don't stress about squeezing in some alone time in your busy schedule anymore. 
+                The DeStress Scheduler links to your Google calendar and schedules Self-Care™ time for you.</p>
+             <button class="btn btn-primary" onclick="window.location.href='#formStart'">Get Started!</button>
+        </div>
+    </div>
+    <div class="container">
+    <a id="formStart"></a>
+    <div class="row">
+    <div class = "col-2">
+    <form class="col-14" id="mainForm">
+        <div class="form-group">
+            <h3>When would you like your stress breaks? (hours, in 24 hour format)</h3>
+            <label for="startHour">Start scheduling breaks after...</label>
+            <input type="number" class="form-control" id="startHour" placeholder="12">
+        </div>
+        <div class="form-group">
+            <label for="endHour">End scheduling breaks before...</label>
+            <input type="number" class="form-control" id="endHour" placeholder="17">
+        </div>
+            <br/>
+            <h3>Check all of the following that may apply to you.</h3>
+            <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check1">
+            <label class="form-check-label" for="check1">Clinically depressed.</label>
+            <br/>
+            <input type="checkbox" class="form-check-input" id="check2">
+            <label class="form-check-label" for="check2">Casually depressed.</label>
+            <br/>
+            <input type="checkbox" class="form-check-input" id="check3">
+            <label class="form-check-label" for="check3">Minority.</label>
+            <br/>
+            <input type="checkbox" class="form-check-input" id="check4">
+            <label class="form-check-label" for="check4">Asian parents.</label>
+            <br/>
+            <input type="checkbox" class="form-check-input" id="check5">
+            <label class="form-check-label" for="check5">"Not depressed just tired"</label>
+            <br/>
+            <input type="checkbox" class="form-check-input" id="check6">
+            <label class="form-check-label" for="check6">On medication.</label>
+            <br/>
+            <input type="checkbox" class="form-check-input" id="check7">
+            <label class="form-check-label" for="check7">Use social media.</label>
+            <br/>
+            <input type="checkbox" class="form-check-input" id="check8">
+            <label class="form-check-label" for="check8">Invisible to society.</label>
+            <br/>
+            <input type="checkbox" class="form-check-input" id="check9">
+            <label class="form-check-label" for="check9">Hate your chosen major.</label>
+            <br/>
+            <input type="checkbox" class="form-check-input" id="check10">
+            <label class="form-check-label" for="check10">Spend most time in Halligan.</label>
+            <br/>
+            <input type="checkbox" class="form-check-input" id="check11">
+            <label class="form-check-label" for="check11">Dishonored the family cow.</label>
+            <br/>
+            <br/>
+            <h2>We predict you'll need <span id="estimate">15</span> minutes for crying.</h2>
+            <h3>Now we just need your permission to modify your calender.</h3>
+        </div>
+        {% csrf_token %}
+    </form>
+    <div class = "col-2">
+    </div> 
+    </div>
+
+    <!--Add buttons to initiate auth sequence and sign out-->
+    <button class="btn btn-danger" id="authorize_button" style="display: none;">Authorize</button>
+    <button class="btn btn-success" id="signout_button" style="display: none;">Sign Out</button>
+
+    <br/>
+    <button class="btn btn-primary" id="goButton">Ready? Set? Go!</button>
+    <div class="row">
+        <div style="margin:auto">
+        </div>
+    </row>
+
+    <div style="height:50px"></div>
+
+    <script src="{% static "googleAuth.js" %}" type="text/javascript"></script>
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+</body>
+
+</html>
